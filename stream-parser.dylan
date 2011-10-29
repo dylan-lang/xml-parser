@@ -160,14 +160,14 @@ define method handle-start-element
 end method handle-start-element;
 
 define method handle-end-element (parser :: <xml-stream-parser>, name)
-  let receiver = element(parser.handlers, #"start-element", default: #f);
+  let receiver = element(parser.handlers, #"end-element", default: #f);
   if (receiver)
     receiver(name);
   end;
 end method handle-end-element;
 
 define method handle-characters (parser :: <xml-stream-parser>, text :: <string>)
-  let receiver = element(parser.handlers, #"start-element", default: #f);
+  let receiver = element(parser.handlers, #"characters", default: #f);
   if (receiver)
     receiver(text);
   end;
