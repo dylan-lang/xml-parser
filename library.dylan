@@ -3,7 +3,6 @@ module: dylan-user
 define library xml-parser
   use common-dylan;
   use anaphora;
-  //use multimap;
   use meta;
   use io;
   use system, import: { file-system, threads };
@@ -93,7 +92,6 @@ define module %productions
   use format-out;
   use streams;
   use format;
-  //use multimap;
   use anaphora;
   use file-system, import: { with-open-file, file-exists? };
   use print;

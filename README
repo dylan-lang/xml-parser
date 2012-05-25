@@ -23,8 +23,7 @@ REQUIRED LIBRARIES
 ==================
 
 To compile the xml-parser sources and to create an executable using the
-xml-parser library, you need the following libraries also available from 
-gd/examples:  anaphora, multimap, and meta.
+xml-parser library, you need the following libraries: anaphora and meta.
 
 HISTORY
 =======
