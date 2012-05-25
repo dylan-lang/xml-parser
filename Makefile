@@ -9,7 +9,7 @@ FILES := library.dylan \
 	 productions.dylan
 
 libxml-parser.a: $(FILES)
-	d2c -L ../anaphora -L ../meta -L xml-parser.lid
+	d2c -L ../meta -L xml-parser.lid
 
 clean:
 	rm *.o *.c *~ cc-*.mak *.a *.du

@@ -2,7 +2,6 @@ module: dylan-user
 
 define library xml-parser
   use common-dylan;
-  use anaphora;
   use meta;
   use io;
   use system, import: { file-system, threads };
@@ -74,7 +73,6 @@ define module printing
   use format;
   use print;
   use pprint;
-  use anaphora;
   use threads;
 
   use xml-parser;
@@ -92,7 +90,6 @@ define module %productions
   use format-out;
   use streams;
   use format;
-  use anaphora;
   use file-system, import: { with-open-file, file-exists? };
   use print;
   use threads;

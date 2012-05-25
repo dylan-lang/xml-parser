@@ -367,15 +367,13 @@ define meta doctypedecl(s, name, sys-id, pub-id, which, markup)
   "<!DOCTYPE", scan-s(s), scan-name(name), 
   yes!(*defining-entities?*),
   {[scan-s(s), scan-external-id(sys-id, which, pub-id),
-   do(let dtd-file = #f;
-      aif(any?( method(dir)
+   do(let dtd-file = any?( method(dir)
 		       let file = concatenate(dir, "/", sys-id);
 		       file.file-exists? & file
-		end, *dtd-paths*))
-        dtd-file := it;
-      else 
+		end, *dtd-paths*);
+       if (~dtd-file)
 	error("%s is not on the DTD search paths of %=", sys-id, *dtd-paths*)
-      end aif;
+      end if;
 // hokay, we've got an external-ID, now let's parse that document
 // and bring in its entities and default attribute values.
       with-open-file(in = dtd-file, direction: #"input-output")
