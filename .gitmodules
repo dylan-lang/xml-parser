@@ -1,0 +1,3 @@
+[submodule "ext/meta"]
+	path = ext/meta
+	url = git://github.com/dylan-lang/meta.git
