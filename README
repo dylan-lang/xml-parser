@@ -4,7 +4,7 @@ We present a native Dylan XML parser library.  This library needs
 the META library (available from www.gwydiondylan.org) and works on both
 Open Dylan and Gwydion Dylan.
 
-This parser comes with additional features.  You may transform the internal 
+This parser comes with additional features.  You may transform the internal
 representation to any form desired (XML, HTML, text, what-have-you).  You may
 also extract elements that have a certain shape (e.g. "//dvd/title").  You
 may index into attributes or immediate child elements using Dylan syntax.  And,
@@ -28,6 +28,7 @@ here as a git submodule.
 
 HISTORY
 =======
+
 Chris Double started this effort, and he developed an initial, working, parser
 using the Dylan META library from David Lichteblau.  He also developed the
 Dylan XML class hierarchy (along the lines of the DOM), and had an algorithm
@@ -39,7 +40,7 @@ the XML spec (BNF?).
 Doug Auclair offered suggestions for improvements to META, integrated Andreas'
 work with Chris', created some macros to ease the parsing effort, implemented
 the transform functionality and entities (both parsing and substituting), and
-fixed bugs. 
+fixed bugs.
 
 Doug Auclair
 <doug@cotilliongroup.com>

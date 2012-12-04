@@ -7,7 +7,7 @@ synopsis: provides a simple, controllable way to print elements
 // (the printing module may be viewed as a derivative work) ... so pretty
 // printing, etc, is controlled by the transform methods and their helpers
 
-define open class <printing> (<xform-state>) 
+define open class <printing> (<xform-state>)
   constant slot stream :: <stream>, required-init-keyword: stream:;
 end;
 
@@ -24,7 +24,7 @@ define method xml-name(ref :: <reference>)
 end method xml-name;
 
 // This method follows a common pattern in this module:  print-object
-// calls transform to do its work.  The transform methods, therefore, 
+// calls transform to do its work.  The transform methods, therefore,
 // exercise more precise control over elements ... print-object is a
 // easy-going approach to viewing elements.
 define method print-object(t :: <tag>, s :: <stream>) => ()
@@ -50,12 +50,12 @@ define function print-closing(t :: <tag>, stream :: <stream>)
 end function print-closing;
 
 define function print-attributes(attribs :: <sequence>, state :: <printing>) => ()
-  for(attr in attribs) transform(attr, state) end;
+  for (attr in attribs) transform(attr, state) end;
 end function print-attributes;
 
 define generic do-transform(xml :: <xml>, state :: <printing>) => ();
 
-define method do-transform(pi :: <processing-instruction>, 
+define method do-transform(pi :: <processing-instruction>,
                            state :: <printing>) => ()
   print-attributes(pi.attributes, state);
 end method do-transform;
@@ -67,29 +67,28 @@ define function print-safely-quoted(text :: <string>, stream :: <stream>)
   print-escaped-quotes(text, stream);
 end function print-safely-quoted;
 
-define function print-system-info(sys :: <external-mixin>, state :: <printing>, 
+define function print-system-info(sys :: <external-mixin>, state :: <printing>,
                                   stream :: <stream>) => ()
-                                  
   do-print-sys-info(sys, state, sys.sys/pub, stream);
 end function print-system-info;
 
 define generic do-print-sys-info(ext :: <external-mixin>, state :: <printing>,
-				 kind :: one-of(#f, #"system", #"public"),
-				 stream :: <stream>) => ();
+                                 kind :: one-of(#f, #"system", #"public"),
+                                 stream :: <stream>) => ();
 
 define method do-print-sys-info(ext :: <external-mixin>, state :: <printing>,
-				kind == #f, stream :: <stream>) => ()
+                                kind == #f, stream :: <stream>) => ()
   // Don't print anything
 end method do-print-sys-info;
 
 define method do-print-sys-info(ext :: <external-mixin>, state :: <printing>,
-				kind == #"system", stream :: <stream>) => ()
+                                kind == #"system", stream :: <stream>) => ()
   write(stream, " SYSTEM");
   print-safely-quoted(ext.sys-id, stream);
 end method do-print-sys-info;
 
 define method do-print-sys-info(ext :: <external-mixin>, state :: <printing>,
-				kind == #"public", stream :: <stream>) => ()
+                                kind == #"public", stream :: <stream>) => ()
   write(stream, " PUBLIC");
   print-safely-quoted(ext.pub-id, stream);
   print-safely-quoted(ext.sys-id, stream);
@@ -100,7 +99,7 @@ define method do-transform(ie :: <internal-entity>, state :: <printing>) => ()
   write-element(stream, ' ');
   pprint-newline(#"fill", stream);
   write-element(stream, '"');
-  for(elt in ie.expansion)
+  for (elt in ie.expansion)
     transform(elt, state)
   end for;
   write-element(stream, '"');
@@ -114,9 +113,9 @@ end method do-transform;
 define method do-transform(dtd :: <dtd>, state :: <printing>) => ()
   let stream = state.stream;
   print-system-info(dtd, state, stream);
-  unless(dtd.internal-declarations.empty?)
+  unless (dtd.internal-declarations.empty?)
     format(stream, " [ ");
-    for(x in dtd.internal-declarations)
+    for (x in dtd.internal-declarations)
       transform(x, state);
     end for;
     format(stream, " ]");
@@ -139,12 +138,12 @@ define method transform(e :: <element>, state :: <printing>)
 
 
     // this test identifies empty elements when printing (saves a bit of space).
-    if(e.text.empty? & e.node-children.empty?)
+    if (e.text.empty? & e.node-children.empty?)
       write-element(stream, '/');
       print-closing(e, stream);
     else
-      dynamic-bind (*started-text?* = 
-                      *started-text?* 
+      dynamic-bind (*started-text?* =
+                      *started-text?*
                         | any?(rcurry(instance?, <char-string>), e.node-children))
         print-closing(e, stream);
         pprint-indent(#"block", 2, stream);
@@ -152,7 +151,7 @@ define method transform(e :: <element>, state :: <printing>)
           pprint-newline(#"mandatory", stream);
         end;
         let first = #t;
-        for(node in e.node-children)
+        for (node in e.node-children)
           unless (first | *started-text?*)
             pprint-newline(#"mandatory", stream);
           end;
@@ -187,9 +186,9 @@ define method transform(a :: <attribute>, state :: <printing>)
   let stream = state.stream;
   write-element(stream, ' ');
   pprint-newline(#"fill", stream);
-  format(stream, 
+  format(stream,
          "%s=%m",
-         a.xml-name, 
+         a.xml-name,
          curry(print-escaped-quotes, a.attribute-value));
 end method transform;
 
@@ -234,9 +233,9 @@ end;
 define function print-filled-string(str :: <string>, s :: <stream>) => ()
   let last-was-whitespace? = #f;
   let looking-at-whitespace? = #f;
-  for(ch in str)
+  for (ch in str)
     looking-at-whitespace? := #f;
-    select(ch)
+    select (ch)
       ' ', '\r', '\n' => begin
                            unless (last-was-whitespace?)
                              write-element(s, ' ');

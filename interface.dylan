@@ -18,15 +18,15 @@ define method name-setter(sym, xml :: <xml>) => (ans)
 end method name-setter;
 
 define method initialize(xml :: <xml>, #key name) => (elt :: <xml>)
-  unless(slot-initialized?(xml, name-with-proper-capitalization)
-         & ~ xml.name-with-proper-capitalization.empty?)
+  unless (slot-initialized?(xml, name-with-proper-capitalization)
+          & ~ xml.name-with-proper-capitalization.empty?)
     xml.name-with-proper-capitalization := as(<string>, name);
   end unless;
   xml;
 end method initialize;
 
 define abstract class <node-mixin> (<object>)
-  slot node-children = #[], init-keyword: children:;    
+  slot node-children = #[], init-keyword: children:;
 end class <node-mixin>;
 
 define class <attribute> (<xml>)
@@ -65,7 +65,7 @@ end method root;
 // Not sealed to allow XML element tags to be subclasses of <element>.
 //
 // N.B. it is (very) preferable to use make-element instead of make
-// when working in conjuction with the xml-parser library.
+// when working in conjunction with the xml-parser library.
 //
 define open class <element> (<attributes>, <node-mixin>)
   slot element-parent :: false-or(<node-mixin>) = #f, init-keyword: parent:;
@@ -108,7 +108,7 @@ end class <char-reference>;
 
 define method unfiltered-text(elt :: <element>) => (s :: <string>)
   let strs = choose(rcurry(instance?, <char-string>), elt.node-children);
-  if(strs.empty?) "" else apply(concatenate, map(text, strs)) end if;
+  if (strs.empty?) "" else apply(concatenate, map(text, strs)) end if;
 end method unfiltered-text;
 
 define constant $hex-digit = "0123456789abcdefABCDEF";
@@ -123,12 +123,12 @@ end method text;
 define method text-setter(txt :: <string>, elt :: <element>) => (s :: <string>)
   // WARNING:  we're only replacing the first <char-string> we find!
   // use element-setter(foo, elt.node-children, x) for more precise control
-  
+
   // if there's no text in this element, then we'll put the text at the end!!!
   let index = find-key(elt.node-children, rcurry(instance?, <char-string>),
                        failure: #f);
   let the-txt = make(<char-string>, text: txt);
-  if(index)
+  if (index)
     elt.node-children[index] := the-txt;
   else
     elt.node-children := concatenate(elt.node-children, vector(the-txt));
@@ -141,8 +141,8 @@ define function trim-string(s :: <sequence>) => (t :: <string>)
   let ans = as(<string>, s);
   let start = 0;
   let stop = ans.size;
-  while(stop > 1 & ans[stop - 1].is-space?) stop := stop - 1; end while;
-  while(start < ans.size & ans[start].is-space?) start := start + 1; end while;
+  while (stop > 1 & ans[stop - 1].is-space?) stop := stop - 1; end while;
+  while (start < ans.size & ans[start].is-space?) start := start + 1; end while;
   if (start < stop)
     copy-sequence(ans, start: start, end: stop);
   else

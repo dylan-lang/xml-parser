@@ -25,7 +25,7 @@ define module xml-parser
 
   create entity-value, attributes, attributes-setter, *dtd-paths*,
     attribute-value, attribute-value-setter,
-    node-children, node-children-setter, 
+    node-children, node-children-setter,
     element-parent, element-parent-setter,
     make-element, sys-id, pub-id, sys/pub,
     internal-declarations, internal-declarations-setter,
@@ -79,7 +79,7 @@ define module printing
 
   use interface;
   use transform;
-  
+
   create print-opening, print-attributes, print-closing;
 end module printing;
 
@@ -126,7 +126,7 @@ define module simple-xml
     real-name,
     start-tag,
     parents;
-    
+
 end module simple-xml;
 
 define module xml-stream-parser

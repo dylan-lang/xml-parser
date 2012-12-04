@@ -10,13 +10,13 @@ define open generic transform(elt :: <xml>, state :: <xform-state>);
 
 //  the standard (default) transformation functions
 define method transform(nodes :: <document>, state :: <xform-state>)
-  for(node in nodes.node-children)
+  for (node in nodes.node-children)
     transform(node, state);
   end for;
 end method transform;
 
 define method transform(nodes :: <element>, state :: <xform-state>)
-  for(node in nodes.node-children)
+  for (node in nodes.node-children)
     transform(node, state);
   end for;
 end method transform;
@@ -39,7 +39,7 @@ end method transform;
 // added this method to clear up ambiguities between <reference> specialization
 // and <xform-state> specialization.
 define method do-reference-xform(in :: <entity-reference>, state :: <xform-state>)
-  for(x in in.entity-value) transform(x, state) end;
+  for (x in in.entity-value) transform(x, state) end;
 end method do-reference-xform;
 
 define method do-reference-xform(in :: <char-reference>, state :: <xform-state>)

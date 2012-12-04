@@ -26,7 +26,7 @@ BUGS:
               {
                 div (class => "edit")
                 {
-                  do(for(slot in ?type.slot-descriptors)
+                  do(for (slot in ?type.slot-descriptors)
                        let name = slot.slot-getter.debug-name;
                        collect(with-xml()
                                  text(name)
@@ -173,19 +173,19 @@ define macro with-xml
 
   attribute:
    { ?key:name => ?value:expression }
-    => { make(<attribute>, 
+    => { make(<attribute>,
               name: ?"key",
               value: ?value) }
    { ?ns:name :: ?key:name => ?value:expression }
-    => { make(<attribute>, 
+    => { make(<attribute>,
               name: concatenate(?"ns" ## ":", ?"key"),
               value: ?value) }
 end macro with-xml;
 
-define method add-attribute (element :: <element>, attribute :: <attribute>) 
+define method add-attribute (element :: <element>, attribute :: <attribute>)
  => (res :: <element>)
   // prevent equal attribute names
-  let existing-attribute = find-key(element.attributes, method (a :: <attribute>) 
+  let existing-attribute = find-key(element.attributes, method (a :: <attribute>)
                                                           a.name = attribute.name
                                                         end);
   if (existing-attribute)
@@ -197,8 +197,8 @@ define method add-attribute (element :: <element>, attribute :: <attribute>)
 end method add-attribute;
 
 define method remove-attribute (element :: <element>, attribute)
-  element.attributes := remove(element.attributes, attribute, 
-                          test: method (a :: <attribute>, b) 
+  element.attributes := remove(element.attributes, attribute,
+                          test: method (a :: <attribute>, b)
                             a.name = as(<symbol>, b);
                           end);
 end method remove-attribute;
@@ -219,7 +219,7 @@ end method attribute;
 define open generic elements (element :: <element>, name :: <object>) => (res :: <sequence>);
 
 // How about calling this find-children ?
-define method elements (element :: <element>, element-name) 
+define method elements (element :: <element>, element-name)
  => (res :: <sequence>);
   choose(method (a)
             a.name = as(<symbol>, element-name)
@@ -229,7 +229,7 @@ end method elements;
 
 define open generic add-element (element :: <element>, node :: <xml>);
 
-define method add-element (element :: <element>, node :: <xml>) 
+define method add-element (element :: <element>, node :: <xml>)
  => (res :: <element>);
   element.node-children := add(element.node-children, node);
   if (object-class(node) = <element>)
@@ -241,12 +241,11 @@ end method add-element;
 define method remove-element (element :: <element>, node-name, #key count: element-count)
  => (res :: <element>);
   element.node-children := remove(element.node-children, node-name, count: element-count,
-                          test: method (a :: <element>, b)            
+                          test: method (a :: <element>, b)
                                   a.name = as(<symbol>, b);
                                 end);
   element;
 end  method remove-element;
-     
 
 define open generic import-element (element :: <element>, node :: <element>);
 
@@ -265,13 +264,13 @@ define method prefix (element :: <element>)
  => (res :: <string>);
   prefix(element.name);
 end method prefix;
-  
+
 define method prefix (name :: type-union(<string>, <symbol>))
   => (res :: <string>);
   split(as(<string>, name), ':')[0];
 end method prefix;
 
-define method prefix-setter (prefix :: <string>, element :: <element>) 
+define method prefix-setter (prefix :: <string>, element :: <element>)
   if (~member?(':', as(<string>, element.name)))
     element.name := as(<symbol>, concatenate(prefix, ":", as(<string>, element.name)));
   end if;
@@ -281,7 +280,7 @@ end method prefix-setter;
 
 define generic real-name (object :: <object>) => (res :: <string>);
 
-define method real-name (element :: <element>) 
+define method real-name (element :: <element>)
  => (res :: <string>);
   real-name(element.name);
 end method real-name;

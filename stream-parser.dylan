@@ -92,7 +92,7 @@ define method dispatch (parser :: <xml-stream-parser>,
  => ()
   parser.text-buffer := add!(parser.text-buffer, char);
 end method;
- 
+
 define method dispatch (parser :: <xml-stream-parser>,
                         char :: <character>, in-tag? == #t, in-root? :: <boolean>)
  => ()
@@ -112,15 +112,15 @@ define method dispatch (parser :: <xml-stream-parser>,
     if (start-tag)
       start-tag := as(<string>, start-tag);
       handle-start-element(parser, start-tag, attributes);
-      if (opened-element?) 
-        push-last(parser.opened-elements, start-tag) 
+      if (opened-element?)
+        push-last(parser.opened-elements, start-tag)
       else
         handle-end-element(parser, start-tag);
       end if;
       parser.parsing-root? := #t;
       skip-next();
     end if;
-    
+
     let (index, end-tag) = scan-end-tag(parser.tag-buffer);
     if (end-tag)
       let begin-tag = pop-last(parser.opened-elements);
@@ -146,7 +146,7 @@ define method dispatch (parser :: <xml-stream-parser>,
   parser.parsing-tag? := #f;
 end method;
 
-define method whitespace? (char :: <character>) 
+define method whitespace? (char :: <character>)
  => (res :: <boolean>);
   instance?(char, one-of('\n', '\t', '\r'))
 end method whitespace?;

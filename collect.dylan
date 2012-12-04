@@ -36,7 +36,7 @@ define thread variable *original-state* :: false-or(<collect-state>) = #f;
 define function copy-down(c :: <collect-state>, elt :: <element>)
  => (d :: <collect-state>)
   let col :: <collect-state> = make(<collect-state>, pattern: c.pattern.tail);
-  unless(c.candidate)
+  unless (c.candidate)
     col.candidate := elt;
     col.depth := *xml-depth*;
   end unless;
@@ -45,16 +45,16 @@ end function copy-down;
 
 define method transform(elt :: <element>, tag-name :: <symbol>,
                         state :: <collect-state>, str :: <stream>)
-  let new-state = if(tag-name == state.pattern[0])
-             if(state.pattern.size == 1)
-               state.elements := concatenate(state.elements, 
-					     list(state.candidate | elt));
+  let new-state = if (tag-name == state.pattern[0])
+             if (state.pattern.size == 1)
+               state.elements := concatenate(state.elements,
+                                             list(state.candidate | elt));
                *original-state*;
              else
                copy-down(state, elt);
              end if;
            else
-             if(*xml-depth* > state.depth) state else *original-state*; end if;
+             if (*xml-depth* > state.depth) state else *original-state*; end if;
            end if;
   next-method(elt, tag-name, new-state, str);
 end method transform;
@@ -64,11 +64,11 @@ end method transform;
 // the list of elements that satisfy that sequence shape
 define generic collect-elements(in :: <node-mixin>, tree :: <sequence>)
  => (ans :: <sequence>);
-      
+
 define method collect-elements(in :: <document>, tree :: <sequence>)
  => (ans :: <sequence>)
-  *original-state* := make(<collect-state>, 
-                           pattern: as(<list>, 
+  *original-state* := make(<collect-state>,
+                           pattern: as(<list>,
                                        map(curry(as, <symbol>), tree)));
   *original-state*.elements := #();
   transform-document(in, state: *original-state*);
@@ -116,7 +116,7 @@ define constant $not-initialized = make(<not-initialized>);
 //  <text>Synopsis:  Using libraries as units of compilation and
 // modules as namespaces affords ...</text>
 //  <text>The standard view of namespaces is that they are a static
-// thing, their names do not change, nor do the bindings within 
+// thing, their names do not change, nor do the bindings within
 // them.</text>
 //  <text>Avoiding name clashes under these assumptions can lead
 // to contorted code...</text>
@@ -126,25 +126,25 @@ define constant $not-initialized = make(<not-initialized>);
 // elt["title"] returns one element and elt["text"] returns
 // a sequence of three elements
 // (and elt["text"][1] returns "The standard view [...]")
-define method element(elt :: <element>, 
+define method element(elt :: <element>,
                       key :: type-union(<string>, <symbol>),
                       #key default = $not-initialized, always-sequence? = #f)
  => (ans)
   let string = as(<string>, key);
   let ans = #f;
-  if(string[0] == '@')
+  if (string[0] == '@')
     let it = attribute(elt, string);
     ans := if (it) it.value else #f end;
   else
     let kids = element-children(elt, as(<symbol>, key));
 // let's simplify indexing for unique tags
-    unless(kids.size == 0)
-      ans := if(kids.size == 1 & ~ always-sequence?) kids[0] else kids end if;
+    unless (kids.size == 0)
+      ans := if (kids.size == 1 & ~ always-sequence?) kids[0] else kids end if;
     end unless;
   end if;
-  if(ans)
+  if (ans)
     ans
-  else if(default == $not-initialized)
+  else if (default == $not-initialized)
          error("%s element not found in %s", key, elt.name);
        else
          default
@@ -162,14 +162,14 @@ define method element-setter(txt :: <string>, elt :: <element>,
   let string = as(<string>, key);
   let setter-fn = #f;
   let ans = #f;
-  if(string[0] == '@')
+  if (string[0] == '@')
     ans := attribute(elt, string);
     setter-fn := value-setter;
   else
     ans := elt[key];
     setter-fn := text-setter;
   end if;
-  if(ans & setter-fn) 
+  if (ans & setter-fn)
     setter-fn(txt, ans)
   else
     error("%s element not in %s", key, elt.name);
@@ -178,8 +178,8 @@ define method element-setter(txt :: <string>, elt :: <element>,
 end method element-setter;
 
 // and the more usual:
-// elt["bar"] := make(<element>, name: "baz", children: #[], 
-//                    parent: elt, attributes: #[]) 
+// elt["bar"] := make(<element>, name: "baz", children: #[],
+//                    parent: elt, attributes: #[])
 // yields <foo name='yo'><baz/></foo>, and
 // elt["@name"] := make(<attribute>, name: "color", value: "blue")
 // yields <foo color='blue'><baz/></foo>
@@ -187,10 +187,10 @@ define method element-setter(new-elt :: <xml>, elt :: <element>,
                              key :: type-union(<string>, <symbol>))
  => (newer)
   let string = as(<string>, key);
-  if(string[0] == '@')
+  if (string[0] == '@')
     let sym = as(<symbol>, copy-sequence(string, start: 1));
     let index = find-key(elt, method(x) x.name == sym end, failure: #f);
-    if(index) elt.attributes[index] := new-elt
+    if (index) elt.attributes[index] := new-elt
     else error("No attribute %s in element %s", sym, elt.name);
     end if;
   else

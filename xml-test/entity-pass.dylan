@@ -18,7 +18,7 @@ define function print-in(color :: <string>, xml :: <xml>, stream :: <stream>)
 end function print-in;
 
 define function header-comment(file-name :: <string>) => (c :: <comment>)
-  make(<comment>, 
+  make(<comment>,
        comment: concatenate(file-name, ".xml parsed by the xml-"
                               "parser library written by Douglas M. Auclair,"
                               " Chris Double, and Andreas Bogk and available"
@@ -26,23 +26,23 @@ define function header-comment(file-name :: <string>) => (c :: <comment>)
 end function header-comment;
 
 define function referenced-entities(namei :: <string>, str :: <stream>, state)
-  unless(*ent*.empty?)
+  unless (*ent*.empty?)
     format(str, "<HTML>\n<BODY BGCOLOR='white'>\n");
     print-in("brown", namei.header-comment, str);
     let ent = sort(map(curry(as, <string>), *ent*.key-sequence));
-    for(x in ent) print-in("purple", *ent*[as(<symbol>, x)], str) end for;
+    for (x in ent) print-in("purple", *ent*[as(<symbol>, x)], str) end for;
     format(str, "\n</BODY>\n</HTML>");
   end unless;
 end function referenced-entities;
 
 //-------------------------------------------------------
 // xform function that grabs the entities and their defs
-define method transform(in :: <entity-reference>, 
+define method transform(in :: <entity-reference>,
                         tag-name :: <symbol>,
-                        state :: <1st-pass>, 
+                        state :: <1st-pass>,
                         str :: <stream>)
-  *ent*[tag-name] := make(<internal-entity>, name: as(<string>, tag-name), 
-                          expands-to: in.entity-value); // got this one, 
+  *ent*[tag-name] := make(<internal-entity>, name: as(<string>, tag-name),
+                          expands-to: in.entity-value); // got this one,
   // now let's see if it refers to any
   do(method(x) transform(x, x.name, state, str) end, in.entity-value);
 end method transform;

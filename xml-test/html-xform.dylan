@@ -5,7 +5,7 @@ Copyright: (c) 2001, LGPL
 Version:   1.0
 
 //-------------------------------------------------------
-// Here's an example of tranforming XML to XML readable 
+// Here's an example of tranforming XML to XML readable
 // as HTML
 define class <html> (<printing>)
   class slot document-name;
@@ -17,9 +17,8 @@ define variable *substitute?* :: <boolean> = #t;
 define method before-transform(node :: type-union(<document>, <element>),
  			       state :: <html>, times :: <integer>,
 			       stream :: <stream>)
-                               
   format(stream, "\n<BR>");
-  for(x from 1 to times) format(stream, "&nbsp;"); end for;
+  for (x from 1 to times) format(stream, "&nbsp;"); end for;
 end method before-transform;
 
 define method transform(c :: <comment>, name :: <symbol>, state :: <html>,
