@@ -1,8 +1,6 @@
 Native Dylan XML-parser library
 
-We present a native Dylan XML parser library.  This library needs
-the META library (available from www.gwydiondylan.org) and works on both
-Open Dylan and Gwydion Dylan.
+We present a native Dylan XML parser library.
 
 This parser comes with additional features.  You may transform the internal
 representation to any form desired (XML, HTML, text, what-have-you).  You may
