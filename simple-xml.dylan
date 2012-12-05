@@ -1,5 +1,6 @@
 module: simple-xml
 author: Hannes Mehnert <hannes@mehnert.org>
+copyright: See LICENSE in this distribution for details.
 
 /*
 BUGS:

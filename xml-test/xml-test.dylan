@@ -1,7 +1,7 @@
 Module:    xml-test
 Synopsis:  Exercises the XML library
 Author:    Douglas M. Auclair, doug@cotilliongroup.com
-Copyright: (c) 2001, LGPL
+Copyright: See LICENSE in this distribution for details.
 Version:   1.0
 
 /** Parses an XML and outputs it as HTML-readable text.

@@ -1,7 +1,7 @@
 Module:    entity-pass
 Synopsis:  Grabs all entities from the document
 Author:    Douglas M. Auclair, doug@cotilliongroup.com
-Copyright: (c) 2001, LGPL
+Copyright: See LICENSE in this distribution for details.
 Version:   1.0
 
 define variable *ent* = make(<table>);

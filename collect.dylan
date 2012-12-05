@@ -1,7 +1,7 @@
 Module:    collect
 Author:    Douglas M. Auclair
-Copyright: (C) 2001, LGPL
-synopsis:  gathers all elements of shape S (a sequence of symbols)
+Copyright: See LICENSE in this distribution for details.
+Synopsis:  gathers all elements of shape S (a sequence of symbols)
 
 // This file is not in use because of transform API change.
 

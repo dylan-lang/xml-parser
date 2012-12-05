@@ -1,7 +1,7 @@
 Module:    html-xform
 Synopsis:  Converts XML to HTML-readable text
 Author:    Douglas M. Auclair, doug@cotilliongroup.com
-Copyright: (c) 2001, LGPL
+Copyright: See LICENSE in this distribution for details.
 Version:   1.0
 
 //-------------------------------------------------------

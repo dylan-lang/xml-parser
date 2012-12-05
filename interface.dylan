@@ -1,7 +1,7 @@
 module: interface
 author: Douglas M. Auclair
+copyright: See LICENSE in this distribution for details.
 inspired-from-the-work-by: Andreas Bogk, Chris Double
-copyright: (c) 2001-2002, LGPL
 
 define abstract class <xml> (<object>)
   virtual slot name;

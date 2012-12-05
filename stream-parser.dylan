@@ -1,4 +1,5 @@
 Module: xml-stream-parser
+copyright: See LICENSE in this distribution for details.
 
 /*
 ** - monitor

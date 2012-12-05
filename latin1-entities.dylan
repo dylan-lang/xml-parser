@@ -1,7 +1,7 @@
 Module: latin1-entities
 synopsis: embeds the latin1 entities into the parser
 author: Douglas M. Auclair
-copyright: (c) 2002, GD license
+copyright: See LICENSE in this distribution for details.
 
 define macro entities-definer
 { define entities ?:name ?entities:* end } =>

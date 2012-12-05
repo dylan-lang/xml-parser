@@ -1,7 +1,7 @@
 Module:    transform
 Author:    Douglas M. Auclair
-Copyright: (C) 2001, LGPL
-synopsis:  provides the default way to transform XML (just gets the
+Copyright: See LICENSE in this distribution for details.
+Synopsis:  provides the default way to transform XML (just gets the
            text), and a facility to allow user transformations.
 
 define open abstract class <xform-state> (<object>) end;

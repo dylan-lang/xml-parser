@@ -4,7 +4,7 @@ based-on-work-by: Chris Double <chris@double.co.nz>
 fleshed-out-by: Andreas Bogk <andreas@andreas.org>
 synthesis: Douglas M. Auclair <doug@cotilliongroup.com> -- DMA
 comments-by: DMA unless otherwise indicated
-copyright: LGPL
+copyright: See LICENSE in this distribution for details.
 
 // *debug-meta-functions?* := #t; // uncomment this line for spewage
 

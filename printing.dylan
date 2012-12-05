@@ -1,6 +1,6 @@
 module: printing
 author: Douglas M. Auclair
-copyright: (c) 2002, LGPL
+copyright: See LICENSE in this distribution for details.
 synopsis: provides a simple, controllable way to print elements
 
 // actually, this printing module depends heavily on the transform module
