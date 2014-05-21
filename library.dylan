@@ -132,6 +132,7 @@ end module simple-xml;
 define module xml-stream-parser
   use common-dylan;
   use common-extensions;
+  use format;
   use streams;
   use xml-parser;
   use %productions;

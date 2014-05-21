@@ -4,7 +4,7 @@ Author: Carl Gay
 define library xml-test-suite
   use common-dylan;
   use io,
-    import: { streams };
+    import: { format, streams };
   use system,
     import: { locators };
   use testworks;
@@ -18,6 +18,7 @@ define module xml-test-suite
   use common-dylan;
   use locators,
     import: { locator-name, <file-locator> };
+  use format;
   use streams;
   use testworks;
   use testworks-specs;
