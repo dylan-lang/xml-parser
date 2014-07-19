@@ -15,8 +15,8 @@ define constant $html = make(<html>);
 define variable *substitute?* :: <boolean> = #t;
 
 define method before-transform(node :: type-union(<document>, <element>),
- 			       state :: <html>, times :: <integer>,
-			       stream :: <stream>)
+                               state :: <html>, times :: <integer>,
+                               stream :: <stream>)
   format(stream, "\n<BR>");
   for (x from 1 to times) format(stream, "&nbsp;"); end for;
 end method before-transform;
@@ -46,7 +46,7 @@ define method prepare-document(doc :: <document>, state :: <html>,
   // insert the banner comment right after the XML processing instruction
   let new-front = vector(doc.node-children[0], header-comment(dname));
   doc.node-children := concatenate(new-front,
-				   copy-sequence(doc.node-children, start: 1));
+                                   copy-sequence(doc.node-children, start: 1));
 end method prepare-document;
 
 define method transform(in :: <document>, tag-name :: <symbol>,
