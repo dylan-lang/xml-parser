@@ -1,0 +1,13 @@
+{
+    "name": "xml-parser",
+    "version": "0.2.0",
+    "description": "XML parser",
+    "dependencies": [
+        "meta@0.1",
+    ],
+    "dev-dependencies": [
+        "testworks@2.1"
+    ],
+    "license": "MIT",
+    "url": "https://github.com/dylan-lang/xml-parser"
+}
