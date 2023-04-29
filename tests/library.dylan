@@ -8,7 +8,6 @@ define library xml-test-suite
   use system,
     import: { locators };
   use testworks;
-  use testworks-specs;
   use xml-parser;
 
   export xml-test-suite;
@@ -21,7 +20,6 @@ define module xml-test-suite
   use format;
   use streams;
   use testworks;
-  use testworks-specs;
 
   use xml-parser;
   use simple-xml;
