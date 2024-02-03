@@ -1,6 +1,6 @@
 {
     "name": "xml-parser",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "description": "XML parser",
     "dependencies": [
         "meta@0.1",
